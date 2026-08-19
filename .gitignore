@@ -1,0 +1,29 @@
+# Dependencies
+/vendor/
+composer.lock
+
+# Data & Database
+/data/*.db
+/data/*.db-wal
+/data/*.db-shm
+/data/*.log
+/data/service.log
+/data/cron.log
+/data/cacert.pem
+
+# PHP binaries
+/php-binaries/
+/PHP Binaries/
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Environment
+.env
+.env.local
