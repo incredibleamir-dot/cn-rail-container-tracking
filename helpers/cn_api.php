@@ -1,7 +1,6 @@
 <?php
 /**
  * CN Rail API Helper - Auth, Tracking, GPS
- * Ported from reference config.php + track.php
  */
 
 function curlSafeClose($ch) {
