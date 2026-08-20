@@ -3,7 +3,8 @@
  * CN Track - Cron Background Tracker
  *
  * Usage: Add to your crontab to auto-refresh tracking every 5 minutes:
- *   */5 * * * * php /path/to/CNTrack/cron-track.php
+ *   php /path/to/cn-rail-container-tracking/cron-track.php
+ *   (cron: 0/5 * * * *)
  *
  * Or run manually:
  *   php cron-track.php
