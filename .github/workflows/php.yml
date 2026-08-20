@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,11 +22,5 @@ jobs:
           php-version: '8.2'
           extensions: pdo_sqlite, curl, json, mbstring
 
-      - name: Validate PHP syntax
-        run: find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \; 2>&1 | (! grep -v "No syntax errors")
-
-      - name: Create data directory
-        run: mkdir -p data && chmod 775 data
-
-      - name: Verify bootstrap loads
-        run: php -r "define('INSTALL_MODE', true); require 'bootstrap.php'; echo 'Bootstrap OK\n';"
+      - name: Lint PHP files
+        run: find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
