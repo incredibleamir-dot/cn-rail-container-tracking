@@ -22,7 +22,7 @@
                         <div class="d-flex gap-1">
                             <button class="btn btn-sm btn-outline-primary" onclick="openEditUserModal(<?php echo $u['id']; ?>,'<?php echo htmlspecialchars(addslashes($u['name'])); ?>','<?php echo $u['role']; ?>')" title="Edit"><i class="fas fa-edit"></i></button>
                             <?php if ($u['id'] != $_SESSION['user_id']): ?>
-                            <form method="POST" action="/admin/toggle" class="d-inline" onsubmit="return confirm('<?php echo $u['is_active'] ? 'Deactivate' : 'Activate'; ?> this user?')"><input type="hidden" name="user_id" value="<?php echo $u['id']; ?>"><button type="submit" class="btn btn-sm btn-outline-<?php echo $u['is_active'] ? 'warning' : 'success'; ?>" title="<?php echo $u['is_active'] ? 'Deactivate' : 'Activate'; ?>"><i class="fas fa-<?php echo $u['is_active'] ? 'ban' : 'check'; ?>"></i></button></form>
+                            <form method="POST" action="/admin/toggle" class="d-inline" id="toggleForm-<?php echo $u['id']; ?>"><input type="hidden" name="user_id" value="<?php echo $u['id']; ?>"><button type="button" class="btn btn-sm btn-outline-<?php echo $u['is_active'] ? 'warning' : 'success'; ?>" title="<?php echo $u['is_active'] ? 'Deactivate' : 'Activate'; ?>" onclick="confirmAction('<?php echo $u['is_active'] ? 'Deactivate' : 'Activate'; ?> this user?', function() { document.getElementById('toggleForm-<?php echo $u['id']; ?>').submit(); })"><i class="fas fa-<?php echo $u['is_active'] ? 'ban' : 'check'; ?>"></i></button></form>
                             <?php endif; ?>
                         </div>
                     </td>

@@ -216,17 +216,7 @@ tr.row-inbond:hover td { background-color: #ffe3e3 !important; }
 .t-label { font-size: 0.6rem; text-transform: uppercase; color: #999; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
 .t-val { font-size: 0.83rem; font-weight: 600; color: #333; margin-bottom: 6px; }
 
-/* ─── Loading ─── */
-#loadingOverlay {
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(10px); z-index: 9999;
-}
-.satellite-pulse {
-    font-size: 4rem; color: var(--primary);
-    animation: pulse 1.5s infinite;
-}
-@keyframes pulse { 0% { transform: scale(1); opacity:1; } 50% { transform: scale(1.2); opacity:0.6; } 100% { transform: scale(1); opacity:1; } }
-.loading-steps { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--dark); margin-top: 1.5rem; font-weight: 500; }
+/* ─── Pulse Icons ─── */
 .pulse-icon { animation: pulse-text 2s infinite; display: inline-block; }
 @keyframes pulse-text { 0% { opacity:1; } 50% { opacity:0.5; } 100% { opacity:1; } }
 

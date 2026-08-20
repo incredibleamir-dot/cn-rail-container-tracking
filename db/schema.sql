@@ -105,7 +105,7 @@ CREATE INDEX IF NOT EXISTS idx_shipments_user ON shipments(user_id, is_archived)
 CREATE INDEX IF NOT EXISTS idx_delivery_user ON delivery_plans(user_id);
 
 -- Default settings
-INSERT OR IGNORE INTO app_settings (key, value) VALUES ('cn_api_key', '');
-INSERT OR IGNORE INTO app_settings (key, value) VALUES ('cn_auth_key', '');
+INSERT OR IGNORE INTO app_settings (key, value) VALUES ('cn_api_key', 'LMHDqRAksRN3W9WSBufgMKsCvbjg6dJo');
+INSERT OR IGNORE INTO app_settings (key, value) VALUES ('cn_auth_key', 'kS3tVxUEihcvio56');
 INSERT OR IGNORE INTO app_settings (key, value) VALUES ('auto_refresh', '0');
 INSERT OR IGNORE INTO app_settings (key, value) VALUES ('timezone', 'America/Toronto');

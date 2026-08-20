@@ -6,22 +6,12 @@ $pageTitle = 'Dashboard';
     <a href="/shipments/create" class="btn btn-primary px-4 py-2" style="border-radius:10px;">
         <i class="fas fa-ship me-1"></i>New Shipment
     </a>
-    <?php $trackParams = http_build_query(array_filter(['group' => $groupField ?? null, 'tag' => $filterTag ?? null, 'archived' => ($showArchived ?? false) ? '1' : null])); ?>
-    <form method="POST" action="/track<?php echo $trackParams ? '?' . $trackParams : ''; ?>" class="d-inline">
-        <input type="hidden" name="track_all" value="1">
-        <button type="submit" class="btn btn-success px-4 py-2" style="border-radius:10px;" onclick="startLoadingAnimation()">
-            <i class="fas fa-sync-alt me-1"></i>Track All
-        </button>
-    </form>
     <button type="button" class="btn btn-outline-primary px-4 py-2" style="border-radius:10px;" onclick="openShareModal()">
         <i class="fas fa-share-alt me-1"></i>Share Selected
     </button>
     <button type="button" class="btn btn-warning px-4 py-2" style="border-radius:10px;" id="planDeliveryBtn" onclick="goToDeliveryPlanner()">
         <i class="fas fa-calendar-alt me-1"></i>Plan Delivery
     </button>
-    <span class="badge bg-light text-dark border ms-auto py-2 px-3 small auto-refresh-timer">
-        <i class="fas fa-clock me-1"></i><span id="refreshCountdown">10:00</span>
-    </span>
 </div>
 
 <?php if (!empty($allTags)): ?>

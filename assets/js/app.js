@@ -7,45 +7,22 @@ function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('show');
 }
 
+// Confirm Modal Helper
+function confirmAction(message, callback) {
+    document.getElementById('confirmMessage').textContent = message;
+    var okBtn = document.getElementById('confirmOkBtn');
+    var modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('confirmModal'));
+    var handler = function() {
+        okBtn.removeEventListener('click', handler);
+        modal.hide();
+        callback();
+    };
+    okBtn.addEventListener('click', handler);
+    modal.show();
+}
+
 // All init code runs after DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-
-    // Auto-Refresh Timer (10 min, persists across page reloads via localStorage)
-    var timerEl = document.getElementById('refreshCountdown');
-    if (timerEl) {
-        var STORAGE_KEY = 'cntrack_refresh_expiry';
-        var REFRESH_SECONDS = 600; // 10 minutes
-        var stored = localStorage.getItem(STORAGE_KEY);
-        var now = Date.now();
-        var expiry;
-
-        if (stored) {
-            expiry = parseInt(stored, 10);
-            // If expired or more than 11 minutes old (stale), reset
-            if (isNaN(expiry) || expiry <= now || (now - expiry) > 660000) {
-                expiry = now + REFRESH_SECONDS * 1000;
-            }
-        } else {
-            expiry = now + REFRESH_SECONDS * 1000;
-        }
-
-        localStorage.setItem(STORAGE_KEY, expiry.toString());
-
-        (function tick() {
-            var remaining = Math.max(0, Math.floor((expiry - Date.now()) / 1000));
-            var m = Math.floor(remaining / 60);
-            var s = remaining % 60;
-            timerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-
-            if (remaining <= 0) {
-                // Timer expired - reload the page to refresh data
-                localStorage.removeItem(STORAGE_KEY);
-                location.reload();
-            } else {
-                setTimeout(tick, 1000);
-            }
-        })();
-    }
 
     // Track Single Form (AJAX)
     document.querySelectorAll('.track-single-form').forEach(function(form) {
@@ -146,22 +123,6 @@ function goToDeliveryPlanner() {
     form.submit();
 }
 
-// Loading Animation
-function startLoadingAnimation() {
-    var overlay = document.getElementById('loadingOverlay');
-    var text = document.getElementById('loadingText');
-    if (!overlay || !text) return;
-    var messages = ["Connecting to CN server...", "Connection successful", "Retrieving Information...", "Parsing data..."];
-    overlay.classList.remove('d-none');
-    overlay.classList.add('d-flex');
-    text.innerText = messages[0];
-    var step = 0;
-    var interval = setInterval(function() {
-        step++;
-        if (step < messages.length) { text.innerText = messages[step]; } else { clearInterval(interval); }
-    }, 800);
-}
-
 // Edit Metadata Modal
 function openEditModal(containerId) {
     var cidField = document.getElementById('edit_container_id');
@@ -194,12 +155,13 @@ function updateBulkActions() {
 function bulkArchive() {
     var ids = [];
     document.querySelectorAll('.row-check:checked').forEach(function(cb) { ids.push(cb.value); });
-    if (!confirm('Archive ' + ids.length + ' container(s)?')) return;
-    var promises = ids.map(function(id) {
-        var fd = new FormData(); fd.append('container_id', id);
-        return fetch('/archive', { method: 'POST', body: fd });
+    confirmAction('Archive ' + ids.length + ' container(s)?', function() {
+        var promises = ids.map(function(id) {
+            var fd = new FormData(); fd.append('container_id', id);
+            return fetch('/archive', { method: 'POST', body: fd });
+        });
+        Promise.all(promises).then(function() { location.reload(); });
     });
-    Promise.all(promises).then(function() { location.reload(); });
 }
 
 function refreshSingle(containerId) {

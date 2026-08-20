@@ -65,9 +65,6 @@ $pageTitle = $pageTitle ?? 'Dashboard';
                 <i class="fas fa-bars"></i>
             </button>
             <div class="d-flex align-items-center gap-2">
-                <span class="badge bg-light text-dark border py-2 px-3 small auto-refresh-timer" id="refreshTimer">
-                    <i class="fas fa-clock me-1"></i><span id="refreshCountdown">10:00</span>
-                </span>
             </div>
         </header>
 
@@ -108,13 +105,6 @@ $pageTitle = $pageTitle ?? 'Dashboard';
                 </div>
             </div>
         </footer>
-    </div>
-
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="position-fixed top-0 start-0 w-100 h-100 d-none flex-column justify-content-center align-items-center">
-        <div class="satellite-pulse mb-4"><i class="fas fa-satellite-dish"></i></div>
-        <h5 class="fw-bold text-dark mb-1"><?php echo APP_NAME; ?></h5>
-        <div class="loading-steps text-primary" id="loadingText">Connecting...</div>
     </div>
 
     <!-- Edit Metadata Modal -->
@@ -164,6 +154,25 @@ $pageTitle = $pageTitle ?? 'Dashboard';
                         <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i>Save</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-danger text-white py-2">
+                    <h6 class="modal-title"><i class="fas fa-exclamation-triangle me-2"></i>Confirm</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <p class="mb-0 fw-semibold" id="confirmMessage"></p>
+                </div>
+                <div class="modal-footer justify-content-center py-2">
+                    <button type="button" class="btn btn-light px-3" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger px-3" id="confirmOkBtn">Confirm</button>
+                </div>
             </div>
         </div>
     </div>

@@ -8,15 +8,15 @@
             <?php foreach ($containers as $c): ?>
             <input type="hidden" name="container_ids[]" value="<?php echo $c['id']; ?>">
             <?php endforeach; ?>
-            <button type="submit" class="btn btn-success" id="shipmentRefreshBtn" onclick="startLoadingAnimation()">
+            <button type="submit" class="btn btn-success" id="shipmentRefreshBtn">
                 <i class="fas fa-sync-alt me-1"></i>Refresh Tracking
             </button>
         </form>
         <a href="/shipments/edit?id=<?php echo $shipment['id']; ?>" class="btn btn-outline-primary"><i class="fas fa-edit me-1"></i>Edit</a>
         <a href="/shipments/add?id=<?php echo $shipment['id']; ?>" class="btn btn-outline-success"><i class="fas fa-plus me-1"></i>Add Containers</a>
-        <form method="POST" action="/shipments/delete" class="d-inline" onsubmit="return confirm('Delete this shipment and unlink all containers? This cannot be undone.');">
+        <form method="POST" action="/shipments/delete" class="d-inline" id="deleteShipmentForm">
             <input type="hidden" name="id" value="<?php echo $shipment['id']; ?>">
-            <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash me-1"></i>Delete</button>
+            <button type="button" class="btn btn-outline-danger" onclick="confirmAction('Delete this shipment and unlink all containers? This cannot be undone.', function() { document.getElementById('deleteShipmentForm').submit(); })"><i class="fas fa-trash me-1"></i>Delete</button>
         </form>
         <a href="/shipments" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-1"></i>Back</a>
     </div>
@@ -67,10 +67,10 @@
                     <td>
                         <div class="d-flex gap-1">
                             <a href="/container?id=<?php echo $c['id']; ?>" class="btn btn-sm btn-outline-primary" title="View Details"><i class="fas fa-eye"></i></a>
-                            <form method="POST" action="/shipments/unlink" class="d-inline" onsubmit="return confirm('Remove this container from the shipment?');">
+                            <form method="POST" action="/shipments/unlink" class="d-inline" id="unlinkForm-<?php echo $c['id']; ?>">
                                 <input type="hidden" name="shipment_id" value="<?php echo $shipment['id']; ?>">
                                 <input type="hidden" name="container_id" value="<?php echo $c['id']; ?>">
-                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Remove from shipment"><i class="fas fa-times"></i></button>
+                                <button type="button" class="btn btn-sm btn-outline-danger" title="Remove from shipment" onclick="confirmAction('Remove this container from the shipment?', function() { document.getElementById('unlinkForm-<?php echo $c['id']; ?>').submit(); })"><i class="fas fa-times"></i></button>
                             </form>
                         </div>
                     </td>
