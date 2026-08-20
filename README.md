@@ -5,6 +5,7 @@
 [![SQLite](https://img.shields.io/badge/SQLite-WAL-orange.svg)](https://sqlite.org)
 [![GitHub last commit](https://img.shields.io/github/last-commit/incredibleamir-dot/cn-rail-container-tracking)](https://github.com/incredibleamir-dot/cn-rail-container-tracking)
 [![GitHub issues](https://img.shields.io/github/issues/incredibleamir-dot/cn-rail-container-tracking)](https://github.com/incredibleamir-dot/cn-rail-container-tracking/issues)
+[![CI](https://github.com/incredibleamir-dot/cn-rail-container-tracking/actions/workflows/php.yml/badge.svg)](https://github.com/incredibleamir-dot/cn-rail-container-tracking/actions/workflows/php.yml)
 
 A self-hosted container tracking application for CN Rail shipments. Track containers, manage shipments, plan deliveries, and analyze shipping data — all from a clean web dashboard.
 
